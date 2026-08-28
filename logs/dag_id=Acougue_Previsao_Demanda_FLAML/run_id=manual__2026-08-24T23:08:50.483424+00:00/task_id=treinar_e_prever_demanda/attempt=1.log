@@ -1,0 +1,36 @@
+[2026-08-24T23:08:54.168+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-08-24T23:08:54.204+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Acougue_Previsao_Demanda_FLAML.treinar_e_prever_demanda manual__2026-08-24T23:08:50.483424+00:00 [queued]>
+[2026-08-24T23:08:54.213+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Acougue_Previsao_Demanda_FLAML.treinar_e_prever_demanda manual__2026-08-24T23:08:50.483424+00:00 [queued]>
+[2026-08-24T23:08:54.213+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-08-24T23:08:54.226+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): treinar_e_prever_demanda> on 2026-08-24 23:08:50.483424+00:00
+[2026-08-24T23:08:54.245+0000] {standard_task_runner.py:63} INFO - Started process 208 to run task
+[2026-08-24T23:08:54.254+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'Acougue_Previsao_Demanda_FLAML', 'treinar_e_prever_demanda', 'manual__2026-08-24T23:08:50.483424+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/dag_previsao_demanda.py', '--cfg-path', '/tmp/tmpjtqb1zvj']
+[2026-08-24T23:08:54.257+0000] {standard_task_runner.py:91} INFO - Job 11: Subtask treinar_e_prever_demanda
+[2026-08-24T23:08:54.325+0000] {task_command.py:426} INFO - Running <TaskInstance: Acougue_Previsao_Demanda_FLAML.treinar_e_prever_demanda manual__2026-08-24T23:08:50.483424+00:00 [running]> on host 4c78a5469a97
+[2026-08-24T23:08:54.452+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='engenharia_dados' AIRFLOW_CTX_DAG_ID='Acougue_Previsao_Demanda_FLAML' AIRFLOW_CTX_TASK_ID='treinar_e_prever_demanda' AIRFLOW_CTX_EXECUTION_DATE='2026-08-24T23:08:50.483424+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-08-24T23:08:50.483424+00:00'
+[2026-08-24T23:08:54.454+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-08-24T23:08:54.475+0000] {logging_mixin.py:188} INFO - [Etapa 1] Conectando ao MLflow via disco local...
+[2026-08-24T23:08:55.344+0000] {logging_mixin.py:188} INFO - [Etapa 2] Carregando dados históricos via deltalake...
+[2026-08-24T23:08:55.345+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-08-24T23:08:55.345+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_previsao_demanda.py", line 119, in executar_pipeline_demanda
+    dt = DeltaTable(LAKEHOUSE_URI_BRONZE, storage_options=STORAGE_OPTIONS)
+  File "/home/airflow/.local/lib/python3.10/site-packages/deltalake/table.py", line 193, in __init__
+    self._table = RawDeltaTable(
+_internal.TableNotFoundError: Could not parse abfs://<SEU_CONTAINER>@<SUA_CONTA>.dfs.core.windows.net/Tables/dbo/bronze_treinamento as a URL: invalid domain character
+[2026-08-24T23:08:55.356+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=Acougue_Previsao_Demanda_FLAML, task_id=treinar_e_prever_demanda, run_id=manual__2026-08-24T23:08:50.483424+00:00, execution_date=20260824T230850, start_date=20260824T230854, end_date=20260824T230855
+[2026-08-24T23:08:55.370+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 11 for task treinar_e_prever_demanda (Could not parse abfs://<SEU_CONTAINER>@<SUA_CONTA>.dfs.core.windows.net/Tables/dbo/bronze_treinamento as a URL: invalid domain character; 208)
+[2026-08-24T23:08:55.400+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-08-24T23:08:55.422+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-08-24T23:08:55.427+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

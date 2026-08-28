@@ -1,0 +1,6 @@
+deltalake>=0.15.0
+pandas>=2.0.0
+flaml[automl]>=2.3.6
+mlflow>=2.10.0
+scikit-learn==1.5.1
+vastai

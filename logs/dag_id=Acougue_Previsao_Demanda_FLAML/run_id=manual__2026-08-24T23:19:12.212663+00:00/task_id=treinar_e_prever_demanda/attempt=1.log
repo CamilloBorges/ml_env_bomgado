@@ -1,0 +1,54 @@
+[2026-08-24T23:19:15.178+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-08-24T23:19:15.210+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Acougue_Previsao_Demanda_FLAML.treinar_e_prever_demanda manual__2026-08-24T23:19:12.212663+00:00 [queued]>
+[2026-08-24T23:19:15.218+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Acougue_Previsao_Demanda_FLAML.treinar_e_prever_demanda manual__2026-08-24T23:19:12.212663+00:00 [queued]>
+[2026-08-24T23:19:15.219+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-08-24T23:19:15.231+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): treinar_e_prever_demanda> on 2026-08-24 23:19:12.212663+00:00
+[2026-08-24T23:19:15.247+0000] {standard_task_runner.py:63} INFO - Started process 538 to run task
+[2026-08-24T23:19:15.252+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'Acougue_Previsao_Demanda_FLAML', 'treinar_e_prever_demanda', 'manual__2026-08-24T23:19:12.212663+00:00', '--job-id', '13', '--raw', '--subdir', 'DAGS_FOLDER/dag_previsao_demanda.py', '--cfg-path', '/tmp/tmpsuxh902d']
+[2026-08-24T23:19:15.255+0000] {standard_task_runner.py:91} INFO - Job 13: Subtask treinar_e_prever_demanda
+[2026-08-24T23:19:15.313+0000] {task_command.py:426} INFO - Running <TaskInstance: Acougue_Previsao_Demanda_FLAML.treinar_e_prever_demanda manual__2026-08-24T23:19:12.212663+00:00 [running]> on host 4c78a5469a97
+[2026-08-24T23:19:15.433+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='engenharia_dados' AIRFLOW_CTX_DAG_ID='Acougue_Previsao_Demanda_FLAML' AIRFLOW_CTX_TASK_ID='treinar_e_prever_demanda' AIRFLOW_CTX_EXECUTION_DATE='2026-08-24T23:19:12.212663+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-08-24T23:19:12.212663+00:00'
+[2026-08-24T23:19:15.434+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-08-24T23:19:15.459+0000] {logging_mixin.py:188} INFO - [Etapa 0] Buscando credenciais no painel do Airflow...
+[2026-08-24T23:19:15.472+0000] {base.py:84} INFO - Using connection ID 'Datalake' for task execution.
+[2026-08-24T23:19:15.472+0000] {logging_mixin.py:188} INFO - [Etapa 1] Conectando ao MLflow via disco local...
+[2026-08-24T23:19:16.249+0000] {logging_mixin.py:188} INFO - [Etapa 2] Carregando dados históricos via deltalake...
+[2026-08-24T23:19:18.185+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-08-24T23:19:18.186+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_previsao_demanda.py", line 122, in executar_pipeline_demanda
+    dt = DeltaTable(LAKEHOUSE_URI_BRONZE, storage_options=STORAGE_OPTIONS)
+  File "/home/airflow/.local/lib/python3.10/site-packages/deltalake/table.py", line 193, in __init__
+    self._table = RawDeltaTable(
+OSError: Kernel error -> The operation lacked the necessary privileges to complete for path armazem_lh.Lakehouse/Tables/dbo/bronze_treinamento/_delta_log/_last_checkpoint
+          [31m↳[0m Error performing GET https://onelake.blob.fabric.microsoft.com/Bomgado/armazem_lh.Lakehouse/Tables/dbo/bronze_treinamento/_delta_log/_last_checkpoint in 1.902619142s - Server returned non-2xx status code
+           [31m↳[0m 403 Forbidden
+            [31m↳[0m <?xml version="1.0" encoding="utf-8"?>
+<Error>
+  <Code>Forbidden</Code>
+  <Message>User is not authorized to perform current operation for workspace 'c806dd49-0120-460a-9e99-80e3eda7d99c', artifact 'b71e43b8-b026-4b9f-9ba3-b1826afa5a01'.</Message>
+</Error>
+
+[2026-08-24T23:19:18.212+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=Acougue_Previsao_Demanda_FLAML, task_id=treinar_e_prever_demanda, run_id=manual__2026-08-24T23:19:12.212663+00:00, execution_date=20260824T231912, start_date=20260824T231915, end_date=20260824T231918
+[2026-08-24T23:19:18.236+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 13 for task treinar_e_prever_demanda (Kernel error -> The operation lacked the necessary privileges to complete for path armazem_lh.Lakehouse/Tables/dbo/bronze_treinamento/_delta_log/_last_checkpoint
+          [31m↳[0m Error performing GET https://onelake.blob.fabric.microsoft.com/Bomgado/armazem_lh.Lakehouse/Tables/dbo/bronze_treinamento/_delta_log/_last_checkpoint in 1.902619142s - Server returned non-2xx status code
+           [31m↳[0m 403 Forbidden
+            [31m↳[0m <?xml version="1.0" encoding="utf-8"?>
+<Error>
+  <Code>Forbidden</Code>
+  <Message>User is not authorized to perform current operation for workspace 'c806dd49-0120-460a-9e99-80e3eda7d99c', artifact 'b71e43b8-b026-4b9f-9ba3-b1826afa5a01'.</Message>
+</Error>
+; 538)
+[2026-08-24T23:19:18.300+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-08-24T23:19:18.330+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-08-24T23:19:18.332+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,25 @@
+[2026-08-24T23:49:33.539+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-08-24T23:49:33.597+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Acougue_Previsao_Demanda_FLAML.treinar_e_prever_demanda manual__2026-08-24T23:49:29.561142+00:00 [queued]>
+[2026-08-24T23:49:33.607+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Acougue_Previsao_Demanda_FLAML.treinar_e_prever_demanda manual__2026-08-24T23:49:29.561142+00:00 [queued]>
+[2026-08-24T23:49:33.607+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-08-24T23:49:33.622+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): treinar_e_prever_demanda> on 2026-08-24 23:49:29.561142+00:00
+[2026-08-24T23:49:33.637+0000] {standard_task_runner.py:63} INFO - Started process 1601 to run task
+[2026-08-24T23:49:33.641+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'Acougue_Previsao_Demanda_FLAML', 'treinar_e_prever_demanda', 'manual__2026-08-24T23:49:29.561142+00:00', '--job-id', '21', '--raw', '--subdir', 'DAGS_FOLDER/dag_previsao_demanda.py', '--cfg-path', '/tmp/tmpeqtu6jua']
+[2026-08-24T23:49:33.644+0000] {standard_task_runner.py:91} INFO - Job 21: Subtask treinar_e_prever_demanda
+[2026-08-24T23:49:33.707+0000] {task_command.py:426} INFO - Running <TaskInstance: Acougue_Previsao_Demanda_FLAML.treinar_e_prever_demanda manual__2026-08-24T23:49:29.561142+00:00 [running]> on host 4c78a5469a97
+[2026-08-24T23:49:33.890+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='engenharia_dados' AIRFLOW_CTX_DAG_ID='Acougue_Previsao_Demanda_FLAML' AIRFLOW_CTX_TASK_ID='treinar_e_prever_demanda' AIRFLOW_CTX_EXECUTION_DATE='2026-08-24T23:49:29.561142+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-08-24T23:49:29.561142+00:00'
+[2026-08-24T23:49:33.892+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-08-24T23:49:33.916+0000] {logging_mixin.py:188} INFO - [Etapa 0] Buscando credenciais no painel do Airflow...
+[2026-08-24T23:49:33.932+0000] {base.py:84} INFO - Using connection ID 'Datalake' for task execution.
+[2026-08-24T23:49:33.933+0000] {logging_mixin.py:188} INFO - [Etapa 1] Conectando ao MLflow via disco local...
+[2026-08-24T23:49:34.795+0000] {logging_mixin.py:188} INFO - [Etapa 2] Carregando dados históricos via deltalake...
+[2026-08-24T23:49:42.491+0000] {logging_mixin.py:188} INFO - Linhas carregadas para treino: 937686
+[2026-08-24T23:49:45.976+0000] {logging_mixin.py:188} INFO - [Etapa 3] Resample diário por SKU...
+[2026-08-24T23:49:48.245+0000] {logging_mixin.py:188} INFO - [Etapa 4] Iniciando AutoML (FLAML)...
+[2026-08-24T23:49:49.867+0000] {logging_mixin.py:188} WARNING - 2026/08/24 23:49:49 WARNING mlflow.models.signature: Failed to infer schema for inputs. Setting schema to `Schema([ColSpec(type=AnyType())]` as default. Note that MLflow doesn't validate data types during inference for AnyType. To see the full traceback, set logging level to DEBUG.
+[2026-08-24T23:50:02.708+0000] {time_series_task.py:77} INFO - Couldn't import pytorch_lightning, skipping TCN estimator
+[2026-08-24T23:50:02.721+0000] {time_series_task.py:84} INFO - Couldn't import Prophet, skipping
+[2026-08-24T23:50:02.733+0000] {time_series_task.py:91} INFO - Couldn't import orbit, skipping
+[2026-08-24T23:50:30.088+0000] {local_task_job_runner.py:240} INFO - Task exited with return code -9
+[2026-08-24T23:50:30.129+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-08-24T23:50:30.136+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
