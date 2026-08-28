@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Runtime / generated artifacts
+logs/
+mlruns/
+*.log
+
+# Editor / OS
+.vscode/
+.DS_Store
+
+# Build / coverage
+.coverage
+coverage/
+build/
+dist/
